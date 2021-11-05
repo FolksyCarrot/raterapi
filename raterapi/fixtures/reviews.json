@@ -1,0 +1,22 @@
+[
+    {
+        "model": "raterapi.reviews",
+        "pk": 1,
+        "fields": {
+            "game": 1,
+            "rater": 1,
+            "content": "This is a review for the game.",
+            "created_on": "2021-05-18"
+        }
+    },
+    {
+        "model": "raterapi.reviews",
+        "pk": 2,
+        "fields": {
+            "game": 2,
+            "rater": 1,
+            "content": "This is a review for the game again.",
+            "created_on": "2021-05-18"
+        }
+    }
+]

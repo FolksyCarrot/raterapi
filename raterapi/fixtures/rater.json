@@ -1,0 +1,11 @@
+[
+    {
+        "model": "raterapi.raters",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bio": "I am not a human being",
+            "profile_img_url": "Image Goes Here"
+        }
+    }
+]
