@@ -23,8 +23,9 @@ class GameView(ViewSet):
                 age_recommendation = request.data["ageRecommendation"],
                 created_on = request.data["createdOn"]
             )
+            #serilizer purpose is to bring back only specific info of an object. If you want the entire object values, serilaizer isn't needed
             serializer = GameSerializer(game, context = {'request': request})
-            return Response(serializer.data)
+            return Response("sure")
 
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
