@@ -5,9 +5,10 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from raterapi.models import Games, Raters, games
+from raterapi.models import Games, Raters, games, Reviews
 
 class GameView(ViewSet):
+
     def create(self, request):
         rater = Raters.objects.get(user=request.auth.user)
         
@@ -24,6 +25,7 @@ class GameView(ViewSet):
                 created_on = request.data["createdOn"]
             )
             #serilizer purpose is to bring back only specific info of an object. If you want the entire object values, serilaizer isn't needed
+
             serializer = GameSerializer(game, context = {'request': request})
             return Response("sure")
 
@@ -55,8 +57,14 @@ class GameView(ViewSet):
             games, many=True, context={'request': request})
         return Response(serializer.data)
 
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Reviews
+        fields = ('content', 'created_on')
+
 class GameSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True, required = False)
     class Meta:
         model = Games
-        fields = ('id', 'title', 'description', 'designer', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'created_on')
+        fields = ('id', 'title', 'description', 'designer', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'created_on', 'reviews')
         depth = 1
