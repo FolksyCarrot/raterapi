@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from raterapi.models import Games, Raters, games, Reviews
+from raterapi.models import Games, Raters, games, Reviews, GameRating
 from django.contrib.auth.models import User
 
 class GameView(ViewSet):
@@ -75,9 +75,12 @@ class ReviewSerializer(serializers.ModelSerializer):
         model=Reviews
         fields = ('content', 'created_on', 'rater')
 
+
+
 class GameSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True, required = False)
+    
     class Meta:
         model = Games
-        fields = ('id', 'title', 'description', 'designer', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'created_on', 'reviews')
+        fields = ('id', 'title', 'description', 'designer', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'created_on', 'reviews', 'average_rating')
         
